@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+      "jsx": "react",
+      "module": "ESNext",
+      "outDir": "./public",
+      "rootDir": ".",
+      "target": "ES2019",
+      "declaration": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "alwaysStrict": true,
+      "noUnusedLocals": false,
+      "noImplicitAny": true,
+      "removeComments": false,
+      "suppressImplicitAnyIndexErrors": true,
+      "strict": true,
+      "strictBindCallApply": true,
+      "strictFunctionTypes": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": true,
+      "experimentalDecorators": true,
+      "baseUrl": "./src",
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "lib": [
+        "esnext",
+        "dom"
+      ]
+  },
+  "include": [
+      "./src/**/*.ts", 
+      "./src/**/*.tsx"  ],
+  "exclude": ["node_modules"]
+}
