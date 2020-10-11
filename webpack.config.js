@@ -16,6 +16,7 @@ const PATHS = {
 
 const devServer = () => {
   return {
+    progress: true,
     contentBase: path.join(__dirname, `public`),
     host: 'localhost',
     port: 8084,
