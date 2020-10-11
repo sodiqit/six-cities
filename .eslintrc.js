@@ -17,7 +17,6 @@ module.exports = {
       'array-func',
       'promise',
       'optimize-regex',
-      'immutable',
       'prettier',
       'unicorn',
     ],
@@ -31,6 +30,7 @@ module.exports = {
     },
     extends: [
       'airbnb-typescript',
+      'airbnb/hooks',
       'plugin:@typescript-eslint/eslint-recommended',
       'plugin:sonarjs/recommended',
       'plugin:promise/recommended',
@@ -65,7 +65,5 @@ module.exports = {
       'optimize-regex/optimize-regex': 2,
       // import
       'import/prefer-default-export': 0,
-      // immutable
-      'immutable/no-mutation': 2
     }
 };
