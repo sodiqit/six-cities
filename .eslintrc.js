@@ -18,11 +18,13 @@ module.exports = {
       'promise',
       'optimize-regex',
       'immutable',
-      'prettier'
+      'prettier',
+      'unicorn',
     ],
     env: {
       es6: true,
-      browser: true
+      browser: true,
+      jest: true,
     },
     globals: {
       IS_PRODUCTION: true
@@ -31,17 +33,24 @@ module.exports = {
       'airbnb-typescript',
       'plugin:@typescript-eslint/eslint-recommended',
       'plugin:sonarjs/recommended',
-      'prettier/@typescript-eslint',
+      'plugin:promise/recommended',
+      'plugin:unicorn/recommended',
       'plugin:prettier/recommended',
+      'prettier/react',
+      'prettier/unicorn',
+      'prettier/@typescript-eslint',
     ],
     rules: {
       'linebreak-style': 0,
-      'react/jsx-one-expression-per-line': [0, { "allow": "literal" }],
+      // unicorn
+      'unicorn/filename-case': 0,
+      'unicorn/no-null': 0,
+      'unicorn/prevent-abbreviations': 0,
       // typescript
       '@typescript-eslint/no-unused-vars': 1,
       '@typescript-eslint/unbound-method': 0,
       '@typescript-eslint/no-explicit-any': 2,
-      '@typescript-eslint/explicit-function-return-type': 2,
+      '@typescript-eslint/explicit-function-return-type': 0,
       '@typescript-eslint/no-use-before-define': 0,
       '@typescript-eslint/ban-ts-ignore': 0,
       '@typescript-eslint/no-non-null-assertion': 0,
@@ -52,12 +61,6 @@ module.exports = {
       'array-func/avoid-reverse': 2,
       'array-func/prefer-flat-map': 1,
       'array-func/prefer-flat': 1,
-      // promise
-      'promise/catch-or-return': 2,
-      'promise/param-names': 2,
-      'promise/always-return': 2,
-      'promise/no-new-statics': 2,
-      'promise/valid-params': 2,
       // optimize-regex
       'optimize-regex/optimize-regex': 2,
       // import
