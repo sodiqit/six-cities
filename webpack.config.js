@@ -22,8 +22,8 @@ const devServer = () => {
     port: 8084,
     compress: false,
     overlay: {
-      // warnings: true,
-      // errors: true
+      warnings: true,
+      errors: true
     }
   }
 }
