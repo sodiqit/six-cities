@@ -99,7 +99,7 @@ module.exports = {
     rules: [
       {
         // JavaScript
-        test: /\.ts(x)$/,
+        test: /\.ts(x)?$/,
         use: ["babel-loader", "awesome-typescript-loader"],
         exclude: "/node_modules/"
       },
