@@ -853,14 +853,11 @@ img {
   background-color: #f2f2f2
 }
 
-.places__option:selected {
-  background-color: #f2f2f2
-}
-
 .places__sorting-caption {
   font-size: 12px;
   line-height: 1.167;
-  font-weight: 700
+  font-weight: 700;
+  margin-right: 4px;
 }
 
 .places__sorting-type {
@@ -947,7 +944,8 @@ img {
 .place-card__price-value {
   font-size: 20px;
   line-height: 1.2;
-  font-weight: 700
+  font-weight: 700;
+  margin-right: 4px;
 }
 
 .place-card__price-text {
