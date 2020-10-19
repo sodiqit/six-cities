@@ -92,7 +92,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
-      '@components': path.join(__dirname, './src/components/'),
+      'components': path.join(__dirname, './src/components/'),
+      'utils': path.join(__dirname, './src/utils/'),
+      'mocks': path.join(__dirname, './src/mocks/'),
     }
   },
   module: {

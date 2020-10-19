@@ -1,5 +1,9 @@
 module.exports = {
-  roots: ['<rootDir>/src'],
   preset: 'ts-jest',
   testEnvironment: 'node',
+  moduleNameMapper: {
+    "^components(.*)": "<rootDir>/src/components$1",
+    "^mocks(.*)": "<rootDir>/src/mocks/$1",
+    "^utils(.*)": "<rootDir>/src/utils/$1",
+  }
 };

@@ -37,5 +37,10 @@
     "./src/**/*.tsx",
     "./custom.d.ts",
   ],
+  "paths": {
+    "components/*": ["./components/*"],
+    "utils/*": ["./utils/*"],
+    "mocks/*": ["./mocks/*"],
+  },
   "exclude": ["node_modules"]
 }
