@@ -1,8 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { Offer } from 'mocks/offers';
+import { getParent } from 'utils/get-parent';
+import { RoomCard } from '../Room-card/Room-card';
 
-export const App = (props: { rooms: string[]; onClick: () => void }): JSX.Element => {
-  const { rooms, onClick } = props;
+const handleMouseEnter = (evt: React.MouseEvent) => {
+  const target = evt.target as HTMLElement;
+  console.log(getParent(target, 'place-card'));
+};
+
+export const App = (props: { rooms: Offer[] }): JSX.Element => {
+  const { rooms } = props;
 
   return (
     <div className="page page--gray page--main">
@@ -116,59 +124,9 @@ export const App = (props: { rooms: string[]; onClick: () => void }): JSX.Elemen
               </select> * */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {rooms.map((title) => {
+                {rooms.map((room) => {
                   return (
-                    <article className="cities__place-card place-card">
-                      <div className="place-card__mark">
-                        <span>Premium</span>
-                      </div>
-                      <div className="cities__image-wrapper place-card__image-wrapper">
-                        <a href="#">
-                          <img
-                            className="place-card__image"
-                            src="img/apartment-01.jpg"
-                            width="260"
-                            height="200"
-                            alt="Place"
-                          />
-                        </a>
-                      </div>
-                      <div className="place-card__info">
-                        <div className="place-card__price-wrapper">
-                          <div className="place-card__price">
-                            <b className="place-card__price-value">&euro;120</b>
-                            <span className="place-card__price-text">
-                              &#47;&nbsp;night
-                            </span>
-                          </div>
-                          <button
-                            className="place-card__bookmark-button button"
-                            type="button"
-                          >
-                            <svg
-                              className="place-card__bookmark-icon"
-                              width="18"
-                              height="19"
-                            >
-                              <use href="#icon-bookmark" />
-                            </svg>
-                            <span className="visually-hidden">To bookmarks</span>
-                          </button>
-                        </div>
-                        <div className="place-card__rating rating">
-                          <div className="place-card__stars rating__stars">
-                            <span style={{ width: '80%' }} />
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <h2 className="place-card__name">
-                          <a href="#" onClick={onClick}>
-                            {title}
-                          </a>
-                        </h2>
-                        <p className="place-card__type">Apartment</p>
-                      </div>
-                    </article>
+                    <RoomCard key={room.id} room={room} onMouseEnter={handleMouseEnter} />
                   );
                 })}
               </div>
