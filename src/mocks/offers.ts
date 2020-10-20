@@ -1,5 +1,6 @@
 interface Offer {
   id: string;
+  coordinate: [number, number];
   city: string;
   title: string;
   price: number;
@@ -13,6 +14,7 @@ interface Offer {
 const offers: Offer[] = [
   {
     id: '0',
+    coordinate: [52.3909553943508, 4.85309666406198],
     city: 'amsterdam',
     title: 'Beautiful & luxurious apartment at great location',
     price: 120,
@@ -24,6 +26,7 @@ const offers: Offer[] = [
   },
   {
     id: '1',
+    coordinate: [52.369553943508, 4.85309666406198],
     city: 'amsterdam',
     title: 'Wood and stone place',
     price: 80,
@@ -35,6 +38,7 @@ const offers: Offer[] = [
   },
   {
     id: '2',
+    coordinate: [52.3909553943508, 4.929309666406198],
     city: 'amsterdam',
     title: 'Canal View Prinsengracht',
     price: 132,
@@ -46,6 +50,7 @@ const offers: Offer[] = [
   },
   {
     id: '3',
+    coordinate: [52.3809553943508, 4.939309666406198],
     city: 'amsterdam',
     title: 'Nice, cozy, warm big bed apartment',
     price: 180,

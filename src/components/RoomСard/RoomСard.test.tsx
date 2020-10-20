@@ -8,6 +8,7 @@ describe('Room card', () => {
     const fn1 = jest.fn();
     const mockRoom = {
       id: '0',
+      coordinate: [0, 0] as [number, number],
       city: 'amsterdam',
       title: 'Beautiful & luxurious apartment at great location',
       price: 120,
