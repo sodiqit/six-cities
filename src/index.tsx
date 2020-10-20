@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './scss/index.scss';
 import './img/logo.svg';
+import './img/pin.svg';
+import './img/pin-active.svg';
 import './img/apartment-01.jpg';
 import './img/room.jpg';
 import './img/apartment-02.jpg';

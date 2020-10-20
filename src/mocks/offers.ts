@@ -11,6 +11,10 @@ interface Offer {
   isBookmark: boolean;
 }
 
+const CITY_COORDINATES = {
+  amsterdam: [52.38333, 4.9] as [number, number],
+};
+
 const offers: Offer[] = [
   {
     id: '0',
@@ -62,4 +66,4 @@ const offers: Offer[] = [
   },
 ];
 
-export { offers, Offer };
+export { offers, Offer, CITY_COORDINATES };

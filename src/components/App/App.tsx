@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Offer } from 'mocks/offers';
 import { RoomCardList } from 'components/RoomCardList/RoomCardList';
-import { Map } from 'components/Map/Map';
+import { CustomMap } from 'components/Map/Map';
 import bind from 'bind-decorator';
 
 interface AppProps {
@@ -31,9 +31,10 @@ export class App extends PureComponent<AppProps, AppState> {
     const { rooms } = this.props;
     const { activeRoomId } = this.state;
     const roomsCoordinates = rooms.map((room) => {
-      const { id, coordinate } = room;
+      const { id, title, coordinate } = room;
       return {
         id,
+        title,
         coordinate,
       };
     });
@@ -155,7 +156,7 @@ export class App extends PureComponent<AppProps, AppState> {
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map
+                  <CustomMap
                     city="amsterdam"
                     activeRoomId={activeRoomId}
                     roomsInfo={roomsCoordinates}
