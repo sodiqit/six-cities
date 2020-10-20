@@ -5,6 +5,7 @@ import { RoomCard } from './RoomСard';
 describe('Room card', () => {
   it('correctly render', () => {
     const fn = jest.fn();
+    const fn1 = jest.fn();
     const mockRoom = {
       id: '0',
       city: 'amsterdam',
@@ -16,7 +17,9 @@ describe('Room card', () => {
       isPremium: true,
       isBookmark: false,
     };
-    const tree = renderer.create(<RoomCard room={mockRoom} onMouseEnter={fn} />).toJSON();
+    const tree = renderer
+      .create(<RoomCard room={mockRoom} onMouseEnter={fn} onMouseLeave={fn1} />)
+      .toJSON();
 
     expect(tree).toMatchSnapshot();
   });

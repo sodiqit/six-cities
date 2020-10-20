@@ -8,6 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('Room card', () => {
   it('correctly hover', () => {
     const fn = jest.fn();
+    const fn1 = jest.fn();
     const mockRoom = {
       id: '0',
       city: 'amsterdam',
@@ -19,11 +20,16 @@ describe('Room card', () => {
       isPremium: true,
       isBookmark: false,
     };
-    const roomCard = shallow(<RoomCard room={mockRoom} onMouseEnter={fn} />);
+    const roomCard = shallow(
+      <RoomCard room={mockRoom} onMouseEnter={fn} onMouseLeave={fn1} />,
+    );
 
     roomCard.simulate('mouseenter');
+    roomCard.simulate('mouseleave');
 
     expect(fn).toHaveBeenCalled();
     expect(fn).toHaveBeenCalledTimes(1);
+    expect(fn1).toHaveBeenCalled();
+    expect(fn1).toHaveBeenCalledTimes(1);
   });
 });

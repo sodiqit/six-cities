@@ -1,25 +1,39 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { convertStarsToWidth } from 'utils/convert-stars';
-import { Offer } from '../../mocks/offers';
+import { Offer } from 'mocks/offers';
 
 interface RoomCardProps {
   room: Offer;
-  onMouseEnter: (event: React.MouseEvent) => void;
+  onMouseEnter: (id: string) => void;
+  onMouseLeave: () => void;
 }
 
 const RoomCard = (props: RoomCardProps) => {
   const {
-    room: { title, price, img, rating, isBookmark, isPremium, typeRoom },
+    room: { id, title, price, img, rating, isBookmark, isPremium, typeRoom },
     onMouseEnter,
+    onMouseLeave,
   } = props;
 
   const bookmarkClassName = `place-card__bookmark-button button ${
     isBookmark ? 'place-card__bookmark-button--active' : ''
   }`;
 
+  const handleMouseEnter = () => {
+    onMouseEnter(id);
+  };
+
+  const handleMouseLeave = () => {
+    onMouseLeave();
+  };
+
   return (
-    <article className="cities__place-card place-card" onMouseEnter={onMouseEnter}>
+    <article
+      className="cities__place-card place-card"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>

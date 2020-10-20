@@ -1,13 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Offer } from 'mocks/offers';
-import { getParent } from 'utils/get-parent';
-import { RoomCard } from '../RoomСard/RoomСard';
-
-const handleMouseEnter = (evt: React.MouseEvent) => {
-  const target = evt.target as HTMLElement;
-  console.log(getParent(target, 'place-card'));
-};
+import { RoomCardList } from 'components/RoomCardList/RoomCardList';
 
 export const App = (props: { rooms: Offer[] }): JSX.Element => {
   const { rooms } = props;
@@ -123,13 +117,7 @@ export const App = (props: { rooms: Offer[] }): JSX.Element => {
               <option className="places__option" value="top-rated">Top rated first</option>
               </select> * */}
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {rooms.map((room) => {
-                  return (
-                    <RoomCard key={room.id} room={room} onMouseEnter={handleMouseEnter} />
-                  );
-                })}
-              </div>
+              <RoomCardList rooms={rooms} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
