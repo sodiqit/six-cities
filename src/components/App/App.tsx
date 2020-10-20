@@ -2,7 +2,7 @@
 import React from 'react';
 import { Offer } from 'mocks/offers';
 import { getParent } from 'utils/get-parent';
-import { RoomCard } from '../Room-card/Room-card';
+import { RoomCard } from '../RoomСard/RoomСard';
 
 const handleMouseEnter = (evt: React.MouseEvent) => {
   const target = evt.target as HTMLElement;

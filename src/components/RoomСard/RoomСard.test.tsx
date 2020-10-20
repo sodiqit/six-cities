@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { RoomCard } from './Room-card';
+import { RoomCard } from './RoomСard';
 
 describe('Room card', () => {
   it('correctly render', () => {
