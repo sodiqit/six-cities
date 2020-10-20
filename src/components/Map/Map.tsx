@@ -9,6 +9,7 @@ interface MapProps {
     coordinate: [number, number];
   }[];
   city: 'amsterdam';
+  activeRoomId: string;
 }
 
 interface MapState {
