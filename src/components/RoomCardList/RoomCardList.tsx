@@ -1,59 +1,37 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { RoomCard } from 'components/RoomСard/RoomСard';
 import { Offer } from 'mocks/offers';
-import { bind } from 'bind-decorator';
 
 interface RoomCardListProps {
   rooms: Offer[];
+  onChangeActiveRoom: (id: string) => void;
 }
 
-interface RoomCardListState {
-  activeRoom: string;
-}
+const RoomCardList = (props: RoomCardListProps) => {
+  const { onChangeActiveRoom, rooms } = props;
 
-class RoomCardList extends PureComponent<RoomCardListProps, RoomCardListState> {
-  constructor(props: RoomCardListProps) {
-    super(props);
+  const handleMouseEnter = (id: string) => {
+    onChangeActiveRoom(id);
+  };
 
-    this.state = {
-      activeRoom: '',
-    };
-  }
+  const handleMouseLeave = () => {
+    onChangeActiveRoom('');
+  };
 
-  @bind
-  private handleMouseEnter(id: string): void {
-    this.setState({
-      activeRoom: id,
-    });
-  }
-
-  @bind
-  private handleMouseLeave(): void {
-    this.setState({
-      activeRoom: '',
-    });
-  }
-
-  render() {
-    const { rooms } = this.props;
-    const { activeRoom } = this.state;
-    console.log(activeRoom);
-
-    return (
-      <div className="cities__places-list places__list tabs__content">
-        {rooms.map((room) => {
-          return (
-            <RoomCard
-              key={room.id}
-              room={room}
-              onMouseEnter={this.handleMouseEnter}
-              onMouseLeave={this.handleMouseLeave}
-            />
-          );
-        })}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="cities__places-list places__list tabs__content">
+      {rooms.map((room) => {
+        return (
+          <RoomCard
+            key={room.id}
+            room={room}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export { RoomCardList };

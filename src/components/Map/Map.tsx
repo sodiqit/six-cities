@@ -40,43 +40,68 @@ class Map extends PureComponent<MapProps, MapState> {
     }
   }
 
+  componentDidUpdate(prevProps: MapProps) {
+    const { activeRoomId } = this.props;
+    const { activeRoomId: prevActiveRoomId } = prevProps;
+
+    if (prevActiveRoomId) {
+      this.changeActivePin(prevActiveRoomId, 'remove');
+    }
+    this.changeActivePin(activeRoomId, 'add');
+  }
+
+  private changeActivePin(id: string, type: 'remove' | 'add') {
+    const { roomsInfo } = this.props;
+    const activeOffer = roomsInfo.find((room) => {
+      return room.id === id;
+    });
+    const iconUrl = type === 'add' ? 'img/pin-active.svg' : 'img/pin.svg';
+
+    if (activeOffer) {
+      const { coordinate } = activeOffer;
+      leaflet
+        .marker(coordinate, {
+          icon: leaflet.icon({
+            iconUrl,
+            iconSize: [30, 30],
+          }),
+        })
+        .addTo(this.map as leaflet.Map);
+    }
+  }
+
   private createMap(container: HTMLElement): void {
     const { roomsInfo, city } = this.props;
     const { zoom } = this.state;
-    // const activeOfferCoordinates = roomsInfo.find((room) => {
-    //   return room.id === activeOfferId;
-    // });
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30],
     });
 
-    if (!this.map) {
-      const map = leaflet.map(container, {
-        zoom,
-        center: CITY_COORDINATES[city],
-        zoomControl: false,
-      });
+    const map = leaflet.map(container, {
+      zoom,
+      center: CITY_COORDINATES[city],
+      zoomControl: false,
+    });
 
-      this.map = map;
+    this.map = map;
 
-      leaflet
-        .tileLayer(
-          `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-          {
-            attribution:
-              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          },
-        )
-        .addTo(this.map);
-    }
+    leaflet
+      .tileLayer(
+        `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        },
+      )
+      .addTo(this.map);
 
     this.map.setView(CITY_COORDINATES[city], zoom);
 
     roomsInfo.forEach((room) => {
       const { coordinate } = room;
-      leaflet.marker(coordinate, { icon }).addTo(this.map as leaflet.Map);
+      leaflet.marker(coordinate, { icon }).addTo(map);
     });
   }
 

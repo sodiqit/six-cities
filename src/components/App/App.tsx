@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { Offer } from 'mocks/offers';
 import { RoomCardList } from 'components/RoomCardList/RoomCardList';
 import { Map } from 'components/Map/Map';
+import bind from 'bind-decorator';
 
 interface AppProps {
   rooms: Offer[];
@@ -17,6 +18,13 @@ export class App extends PureComponent<AppProps, AppState> {
     this.state = {
       activeRoomId: '',
     };
+  }
+
+  @bind
+  private handleChangeActiveRoom(id: string) {
+    this.setState({
+      activeRoomId: id,
+    });
   }
 
   render() {
@@ -140,7 +148,10 @@ export class App extends PureComponent<AppProps, AppState> {
                 <option className="places__option" value="top-rated">Top rated first</option>
                 </select> * */}
                 </form>
-                <RoomCardList rooms={rooms} />
+                <RoomCardList
+                  onChangeActiveRoom={this.handleChangeActiveRoom}
+                  rooms={rooms}
+                />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
