@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-fn-reference-in-iterator */
 import React from 'react';
 import leaflet from 'leaflet';
 import { Map, TileLayer, Marker, Tooltip } from 'react-leaflet';
