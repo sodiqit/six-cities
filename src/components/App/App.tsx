@@ -1,17 +1,14 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import type { FC } from 'react';
-import { Offer } from 'mocks/offers';
+import { useSelector } from 'react-redux';
 import { RoomCardList } from 'components/RoomCardList/RoomCardList';
 import { CustomMap } from 'components/Map/Map';
+import { State } from 'store/dto';
 
-interface AppProps {
-  rooms: Offer[];
-}
-
-export const App: FC<AppProps> = (props) => {
-  const { rooms } = props;
+export const App: FC = () => {
+  const rooms = useSelector((state: State) => state.rooms);
+  const city = useSelector((state: State) => state.city);
   const [activeRoomId, setActiveRoomId] = useState('');
 
   const handleChangeActiveRoom = (id: string) => {
@@ -101,7 +98,10 @@ export const App: FC<AppProps> = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">
+                {rooms.length} places to stay in{' '}
+                {`${city[0].toUpperCase()}${city.slice(1)}`}
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type">
