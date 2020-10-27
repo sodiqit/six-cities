@@ -4,7 +4,7 @@ import { changeCity } from 'store/actions';
 import { State } from 'store/dto';
 import { Location } from 'components/Location/Location';
 
-const Menu = () => {
+const Menu = React.memo(() => {
   const activeCity = useSelector((state: State) => state.city);
   const cities = useSelector((state: State) => state.cities);
   const dispatch = useDispatch();
@@ -25,6 +25,6 @@ const Menu = () => {
       })}
     </ul>
   );
-};
+});
 
 export { Menu };
