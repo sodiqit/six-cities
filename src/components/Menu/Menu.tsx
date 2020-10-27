@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeCity } from 'store/actions';
 import { State } from 'store/dto';
-import { Location } from 'components/MenuButton/Location';
+import { Location } from 'components/Location/Location';
 
 const Menu = () => {
   const activeCity = useSelector((state: State) => state.city);
