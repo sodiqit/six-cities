@@ -41,6 +41,7 @@
     "components/*": ["./components/*"],
     "utils/*": ["./utils/*"],
     "mocks/*": ["./mocks/*"],
+    "redux/*": ["./redux/*"]
   },
   "exclude": ["node_modules"]
 }
