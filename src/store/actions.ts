@@ -1,6 +1,6 @@
-import { Cities, ChangeCityACtion, ActionsType } from './dto';
+import { City, ChangeCityACtion, ActionsType } from './dto';
 
-const changeCity = (city: Cities): ChangeCityACtion => ({
+const changeCity = (city: City): ChangeCityACtion => ({
   type: ActionsType.CHANGE_CITY,
   payload: city,
 });

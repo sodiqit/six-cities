@@ -1,20 +1,21 @@
 import { Offer } from 'mocks/offers';
 
-type Cities = 'amsterdam' | 'cologne' | 'brussels' | 'hamburg' | 'dusseldorf' | 'paris';
+type City = 'amsterdam' | 'cologne' | 'brussels' | 'hamburg' | 'dusseldorf' | 'paris';
 
 enum ActionsType {
   CHANGE_CITY = 'CHANGE_CITY',
 }
 
 type State = {
-  city: Cities;
+  city: City;
   rooms: Offer[];
+  cities: City[];
 };
 
 type ChangeCityACtion = {
   type: ActionsType.CHANGE_CITY;
-  payload: Cities;
+  payload: City;
 };
 
 export { ActionsType };
-export type { State, ChangeCityACtion, Cities };
+export type { State, ChangeCityACtion, City };

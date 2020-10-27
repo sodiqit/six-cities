@@ -6,6 +6,7 @@ import { State, ActionsType, ChangeCityACtion } from './dto';
 const initialState: State = {
   city: 'amsterdam',
   rooms: offers,
+  cities: ['paris', 'cologne', 'brussels', 'amsterdam', 'hamburg', 'dusseldorf'],
 };
 
 const reducer = (state = initialState, action: ChangeCityACtion) => {
