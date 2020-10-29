@@ -87,4 +87,4 @@ const RoomCard = (props: RoomCardProps) => {
   );
 };
 
-export { RoomCard };
+export default React.memo(RoomCard);

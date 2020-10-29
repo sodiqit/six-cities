@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { CityName } from 'services/types';
-import { RoomCard } from './RoomСard';
+import RoomCard from './RoomСard';
 
 describe('Room card', () => {
   it('correctly render', () => {

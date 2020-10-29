@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeCity } from 'store/room/actions';
 import { RootState } from 'store';
-import { Location } from 'components/Location/Location';
+import Location from 'components/Location/Location';
 
-const Menu = React.memo(() => {
+const Menu = () => {
   const activeCity = useSelector((state: RootState) => state.rooms.city);
   const cities = useSelector((state: RootState) => state.rooms.cities);
   const dispatch = useDispatch();
@@ -25,6 +25,6 @@ const Menu = React.memo(() => {
       })}
     </ul>
   );
-});
+};
 
-export { Menu };
+export default React.memo(Menu);

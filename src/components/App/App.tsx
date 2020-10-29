@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { RoomCardList } from 'components/RoomCardList/RoomCardList';
-import { CustomMap } from 'components/Map/Map';
+import { useSelector, useDispatch } from 'react-redux';
+import RoomCardList from 'components/RoomCardList/RoomCardList';
+import Map from 'components/Map/Map';
+import Menu from 'components/Menu/Menu';
 import { RootState } from 'store';
-import { Menu } from 'components/Menu/Menu';
+import { loadRooms } from 'store/room/actions';
 
-export const App: FC = () => {
+export const App: FC = React.memo(() => {
   const rooms = useSelector((state: RootState) => state.rooms.rooms);
   const city = useSelector((state: RootState) => state.rooms.city);
+  const isLoading = useSelector((state: RootState) => state.rooms.isLoading);
+  const dispatch = useDispatch();
+
   const [activeRoomId, setActiveRoomId] = useState(-1);
 
   const handleChangeActiveRoom = (id: number) => {
@@ -25,6 +29,12 @@ export const App: FC = () => {
       coordinate,
     };
   });
+
+  const cityCoordinate = rooms.find((room) => room.city.name === city)?.city.location;
+
+  useEffect(() => {
+    dispatch(loadRooms());
+  }, [dispatch]);
 
   return (
     <div className="page page--gray page--main">
@@ -108,12 +118,16 @@ export const App: FC = () => {
                 <option className="places__option" value="top-rated">Top rated first</option>
                 </select> * */}
               </form>
-              <RoomCardList onChangeActiveRoom={handleChangeActiveRoom} rooms={rooms} />
+              {isLoading ? (
+                <div>Loading rooms...</div>
+              ) : (
+                <RoomCardList onChangeActiveRoom={handleChangeActiveRoom} rooms={rooms} />
+              )}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <CustomMap
-                  city={city}
+                <Map
+                  cityCoordinate={cityCoordinate}
                   activeRoomId={activeRoomId}
                   roomsInfo={roomsCoordinates}
                 />
@@ -124,4 +138,4 @@ export const App: FC = () => {
       </main>
     </div>
   );
-};
+});

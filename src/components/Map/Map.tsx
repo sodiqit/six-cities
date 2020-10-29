@@ -1,8 +1,7 @@
 import React from 'react';
 import leaflet from 'leaflet';
 import { Map, TileLayer, Marker, Tooltip } from 'react-leaflet';
-import { CITY_COORDINATES } from 'mocks/offers';
-import { CityName } from 'services/types';
+import { Location } from 'services/types';
 
 interface MapProps {
   roomsInfo: {
@@ -10,19 +9,34 @@ interface MapProps {
     title: string;
     coordinate: [number, number];
   }[];
-  city: CityName;
   activeRoomId: number;
+  cityCoordinate?: Location;
 }
 
 const CustomMap = (props: MapProps) => {
-  const { city, roomsInfo, activeRoomId } = props;
+  const {
+    roomsInfo,
+    activeRoomId,
+    cityCoordinate = {
+      latitude: 52.38333,
+      longitude: 4.9,
+      zoom: 12,
+    },
+  } = props;
+
+  const correctCityCoordinate = [cityCoordinate.latitude, cityCoordinate.longitude] as [
+    number,
+    number,
+  ];
+
+  const { zoom } = cityCoordinate;
 
   return (
     <Map
       style={{ height: '100%' }}
-      zoom={12}
+      zoom={zoom}
       zoomControl={false}
-      center={CITY_COORDINATES[city]}
+      center={correctCityCoordinate}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
@@ -45,4 +59,4 @@ const CustomMap = (props: MapProps) => {
   );
 };
 
-export { CustomMap };
+export default CustomMap;

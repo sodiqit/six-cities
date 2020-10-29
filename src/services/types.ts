@@ -37,4 +37,4 @@ interface Room {
   type: string;
 }
 
-export type { CityName, Room };
+export type { CityName, Room, Location };

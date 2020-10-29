@@ -1,5 +1,5 @@
 import React from 'react';
-import { RoomCard } from 'components/RoomСard/RoomСard';
+import RoomCard from 'components/RoomСard/RoomСard';
 import { Room } from 'services/types';
 
 interface RoomCardListProps {
@@ -34,4 +34,4 @@ const RoomCardList = (props: RoomCardListProps) => {
   );
 };
 
-export { RoomCardList };
+export default React.memo(RoomCardList);

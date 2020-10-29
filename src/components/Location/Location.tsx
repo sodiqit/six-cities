@@ -24,4 +24,4 @@ const Location: FC<LocationProps> = (props) => {
   );
 };
 
-export { Location };
+export default React.memo(Location);

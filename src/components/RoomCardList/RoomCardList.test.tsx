@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { RoomCardList } from './RoomCardList';
+import RoomCardList from './RoomCardList';
 
 describe('App', () => {
   it('should correct render', () => {
