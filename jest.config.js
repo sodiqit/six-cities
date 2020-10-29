@@ -6,5 +6,6 @@ module.exports = {
     "^mocks(.*)": "<rootDir>/src/mocks/$1",
     "^utils(.*)": "<rootDir>/src/utils/$1",
     "^store(.*)": "<rootDir>/src/store/$1",
+    "^services(.*)": "<rootDir>/src/services/$1",
   }
 };

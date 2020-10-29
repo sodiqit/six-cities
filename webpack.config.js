@@ -22,8 +22,8 @@ const devServer = () => {
     port: 8084,
     compress: false,
     overlay: {
-      warnings: true,
-      errors: true
+      // warnings: true,
+      // errors: true
     }
   }
 }
@@ -96,6 +96,7 @@ module.exports = {
       'utils': path.join(__dirname, './src/utils/'),
       'mocks': path.join(__dirname, './src/mocks/'),
       'store': path.join(__dirname, './src/store/'),
+      'services': path.join(__dirname, './src/services/'),
     }
   },
   module: {

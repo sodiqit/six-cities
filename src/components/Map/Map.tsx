@@ -2,15 +2,16 @@ import React from 'react';
 import leaflet from 'leaflet';
 import { Map, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import { CITY_COORDINATES } from 'mocks/offers';
+import { CityName } from 'services/types';
 
 interface MapProps {
   roomsInfo: {
-    id: string;
+    id: number;
     title: string;
     coordinate: [number, number];
   }[];
-  city: 'amsterdam';
-  activeRoomId: string;
+  city: CityName;
+  activeRoomId: number;
 }
 
 const CustomMap = (props: MapProps) => {

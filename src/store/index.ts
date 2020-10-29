@@ -1,23 +1,20 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { offers } from 'mocks/offers';
-import { State, ActionsType, ChangeCityACtion } from './dto';
+import createMiddleware from 'redux-saga';
+import roomsSaga from './room/sagas';
+import roomsReducer from './room/reducer';
+// — https://htmlacademy-react-2.appspot.com/six-cities
 
-const initialState: State = {
-  city: 'amsterdam',
-  rooms: offers,
-  cities: ['paris', 'cologne', 'brussels', 'amsterdam', 'hamburg', 'dusseldorf'],
-};
+type RootState = ReturnType<typeof reducer>;
 
-const reducer = (state = initialState, action: ChangeCityACtion) => {
-  if (action.type === ActionsType.CHANGE_CITY) {
-    return {
-      ...state,
-      city: action.payload,
-    };
-  }
+const reducer = combineReducers({
+  rooms: roomsReducer,
+});
 
-  return state;
-};
+const sagaMiddleware = createMiddleware();
 
-export const store = createStore(reducer, composeWithDevTools());
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+sagaMiddleware.run(roomsSaga);
+
+export { store };
+export type { RootState };

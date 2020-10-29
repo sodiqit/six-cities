@@ -1,21 +1,21 @@
 import React from 'react';
 import { RoomCard } from 'components/RoomСard/RoomСard';
-import { Offer } from 'mocks/offers';
+import { Room } from 'services/types';
 
 interface RoomCardListProps {
-  rooms: Offer[];
-  onChangeActiveRoom: (id: string) => void;
+  rooms: Room[];
+  onChangeActiveRoom: (id: number) => void;
 }
 
 const RoomCardList = (props: RoomCardListProps) => {
   const { onChangeActiveRoom, rooms } = props;
 
-  const handleMouseEnter = (id: string) => {
+  const handleMouseEnter = (id: number) => {
     onChangeActiveRoom(id);
   };
 
   const handleMouseLeave = () => {
-    onChangeActiveRoom('');
+    onChangeActiveRoom(-1);
   };
 
   return (

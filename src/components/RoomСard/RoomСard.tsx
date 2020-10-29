@@ -1,23 +1,32 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { convertStarsToWidth } from 'utils/convert-stars';
-import { Offer } from 'mocks/offers';
+import { Room } from 'services/types';
 
 interface RoomCardProps {
-  room: Offer;
-  onMouseEnter: (id: string) => void;
+  room: Room;
+  onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
 const RoomCard = (props: RoomCardProps) => {
   const {
-    room: { id, title, price, img, rating, isBookmark, isPremium, typeRoom },
+    room: {
+      id,
+      title,
+      price,
+      preview_image: img,
+      rating,
+      is_favorite: isFavorite,
+      is_premium: isPremium,
+      type,
+    },
     onMouseEnter,
     onMouseLeave,
   } = props;
 
   const bookmarkClassName = `place-card__bookmark-button button ${
-    isBookmark ? 'place-card__bookmark-button--active' : ''
+    isFavorite ? 'place-card__bookmark-button--active' : ''
   }`;
 
   const handleMouseEnter = () => {
@@ -72,7 +81,7 @@ const RoomCard = (props: RoomCardProps) => {
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">{typeRoom}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

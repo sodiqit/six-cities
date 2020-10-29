@@ -3,20 +3,22 @@ import type { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { RoomCardList } from 'components/RoomCardList/RoomCardList';
 import { CustomMap } from 'components/Map/Map';
-import { State } from 'store/dto';
+import { RootState } from 'store';
 import { Menu } from 'components/Menu/Menu';
 
 export const App: FC = () => {
-  const rooms = useSelector((state: State) => state.rooms);
-  const city = useSelector((state: State) => state.city);
-  const [activeRoomId, setActiveRoomId] = useState('');
+  const rooms = useSelector((state: RootState) => state.rooms.rooms);
+  const city = useSelector((state: RootState) => state.rooms.city);
+  const [activeRoomId, setActiveRoomId] = useState(-1);
 
-  const handleChangeActiveRoom = (id: string) => {
+  const handleChangeActiveRoom = (id: number) => {
     setActiveRoomId(id);
   };
 
   const roomsCoordinates = rooms.map((room) => {
-    const { id, title, coordinate } = room;
+    const { id, title, location } = room;
+    const { latitude, longitude } = location;
+    const coordinate = [latitude, longitude] as [number, number];
     return {
       id,
       title,
@@ -68,8 +70,7 @@ export const App: FC = () => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {rooms.length} places to stay in{' '}
-                {`${city[0].toUpperCase()}${city.slice(1)}`}
+                {rooms.length} places to stay in {city}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -112,7 +113,7 @@ export const App: FC = () => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <CustomMap
-                  city="amsterdam"
+                  city={city}
                   activeRoomId={activeRoomId}
                   roomsInfo={roomsCoordinates}
                 />

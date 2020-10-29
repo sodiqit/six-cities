@@ -1,16 +1,12 @@
 import React, { FC, MouseEvent } from 'react';
-import { City } from 'store/dto';
+import { CityName } from 'services/types';
 
 interface LocationProps {
-  city: City;
+  city: CityName;
   isActive: boolean;
   href: string;
   onClick: (evt: MouseEvent) => void;
 }
-
-const formateCity = (city: string) => {
-  return `${city[0].toUpperCase()}${city.slice(1)}`;
-};
 
 const Location: FC<LocationProps> = (props) => {
   const { city, isActive, onClick } = props;
@@ -23,7 +19,7 @@ const Location: FC<LocationProps> = (props) => {
       href="#"
       onClick={onClick}
     >
-      <span>{formateCity(city)}</span>
+      <span>{city}</span>
     </a>
   );
 };

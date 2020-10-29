@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeCity } from 'store/actions';
-import { State } from 'store/dto';
+import { changeCity } from 'store/room/actions';
+import { RootState } from 'store';
 import { Location } from 'components/Location/Location';
 
 const Menu = React.memo(() => {
-  const activeCity = useSelector((state: State) => state.city);
-  const cities = useSelector((state: State) => state.cities);
+  const activeCity = useSelector((state: RootState) => state.rooms.city);
+  const cities = useSelector((state: RootState) => state.rooms.cities);
   const dispatch = useDispatch();
 
   return (
