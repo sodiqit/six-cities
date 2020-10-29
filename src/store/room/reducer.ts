@@ -1,4 +1,4 @@
-import { RoomsState, ActionsType, RoomsActions } from './types';
+import { RoomsState, ActionsType, SortTypes, RoomsActions } from './types';
 
 const initialState: RoomsState = {
   error: null,
@@ -6,33 +6,36 @@ const initialState: RoomsState = {
   city: 'Amsterdam',
   rooms: [],
   cities: ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'],
+  sortType: SortTypes.POPULAR,
 };
 
 const reducer = (state = initialState, action: RoomsActions): RoomsState => {
-  if (action.type === ActionsType.CHANGE_CITY) {
-    return {
-      ...state,
-      city: action.payload,
-    };
+  switch (action.type) {
+    case ActionsType.CHANGE_CITY:
+      return {
+        ...state,
+        city: action.payload,
+      };
+    case ActionsType.CHANGE_SORT_TYPE:
+      return {
+        ...state,
+        sortType: action.payload,
+      };
+    case ActionsType.LOAD_ROOMS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        rooms: action.payload,
+      };
+    case ActionsType.LOAD_ROOMS_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
   }
-
-  if (action.type === ActionsType.LOAD_ROOMS_SUCCESS) {
-    return {
-      ...state,
-      isLoading: false,
-      rooms: action.payload,
-    };
-  }
-
-  if (action.type === ActionsType.LOAD_ROOMS_FAIL) {
-    return {
-      ...state,
-      isLoading: false,
-      error: action.payload,
-    };
-  }
-
-  return state;
 };
 
 export default reducer;

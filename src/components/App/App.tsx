@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import type { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import RoomCardList from 'components/RoomCardList/RoomCardList';
@@ -6,10 +6,12 @@ import Map from 'components/Map/Map';
 import Menu from 'components/Menu/Menu';
 import { RootState } from 'store';
 import { loadRooms } from 'store/room/actions';
+import { sortRooms } from 'utils/sort-rooms';
 
 export const App: FC = React.memo(() => {
   const rooms = useSelector((state: RootState) => state.rooms.rooms);
   const city = useSelector((state: RootState) => state.rooms.city);
+  const sortType = useSelector((state: RootState) => state.rooms.sortType);
   const isLoading = useSelector((state: RootState) => state.rooms.isLoading);
   const dispatch = useDispatch();
 
@@ -29,6 +31,12 @@ export const App: FC = React.memo(() => {
       coordinate,
     };
   });
+
+  const filteredRooms = useMemo(() => sortRooms(rooms, city, sortType), [
+    rooms,
+    city,
+    sortType,
+  ]);
 
   const cityCoordinate = rooms.find((room) => room.city.name === city)?.city.location;
 
@@ -80,7 +88,7 @@ export const App: FC = React.memo(() => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {rooms.length} places to stay in {city}
+                {filteredRooms.length} places to stay in {city}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -121,16 +129,21 @@ export const App: FC = React.memo(() => {
               {isLoading ? (
                 <div>Loading rooms...</div>
               ) : (
-                <RoomCardList onChangeActiveRoom={handleChangeActiveRoom} rooms={rooms} />
+                <RoomCardList
+                  onChangeActiveRoom={handleChangeActiveRoom}
+                  rooms={filteredRooms}
+                />
               )}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map
-                  cityCoordinate={cityCoordinate}
-                  activeRoomId={activeRoomId}
-                  roomsInfo={roomsCoordinates}
-                />
+                {!isLoading && (
+                  <Map
+                    cityCoordinate={cityCoordinate}
+                    activeRoomId={activeRoomId}
+                    roomsInfo={roomsCoordinates}
+                  />
+                )}
               </section>
             </div>
           </div>

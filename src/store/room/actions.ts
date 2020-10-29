@@ -2,14 +2,21 @@ import { CityName, Room } from 'services/types';
 import {
   ActionsType,
   ChangeCityAction,
+  ChangeSortTypeAction,
   LoadAction,
   LoadFailAction,
   LoadSuccessAction,
+  SortTypes,
 } from './types';
 
 const changeCity = (city: CityName): ChangeCityAction => ({
   type: ActionsType.CHANGE_CITY,
   payload: city,
+});
+
+const changeSortType = (sortType: Partial<SortTypes>): ChangeSortTypeAction => ({
+  type: ActionsType.CHANGE_SORT_TYPE,
+  payload: sortType,
 });
 
 const loadRooms = (): LoadAction => ({
@@ -26,4 +33,4 @@ const loadRoomsFail = (error: string): LoadFailAction => ({
   payload: error,
 });
 
-export { changeCity, loadRoomsSuccess, loadRoomsFail, loadRooms };
+export { changeCity, changeSortType, loadRoomsSuccess, loadRoomsFail, loadRooms };
