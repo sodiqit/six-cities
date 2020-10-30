@@ -23,6 +23,7 @@
     "strictPropertyInitialization": true,
     "sourceMap": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "baseUrl": "./src",
     "typeRoots": [
       "node_modules/@types"

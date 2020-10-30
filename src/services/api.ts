@@ -1,23 +1,36 @@
-import axios, { AxiosInstance } from 'axios';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/analytics';
+import firebaseConfig from './config.json';
 
 class Api {
-  private url: string;
+  auth: firebase.auth.Auth;
 
-  private api: AxiosInstance;
+  firestore: firebase.firestore.Firestore;
+
+  rooms: firebase.firestore.CollectionReference;
+
+  analytics: firebase.analytics.Analytics;
 
   constructor() {
-    this.url = 'https://htmlacademy-react-2.appspot.com/six-cities';
-    this.api = axios.create({
-      baseURL: this.url,
-      timeout: 5000,
-      withCredentials: true,
-    });
+    if (firebase.apps.length === 0) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    this.firestore = firebase.firestore();
+    this.auth = firebase.auth();
+    this.analytics = firebase.analytics();
+
+    this.rooms = this.firestore.collection('rooms');
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async getRooms() {
-    const response = await this.api.get('/hotels');
-    const rooms = await response.data;
-    return rooms;
+    // const roomsDocs = await this.rooms.orderBy('price', 'asc').get();
+    // const rooms = roomsDocs.docs.map((roomDoc) => roomDoc.data());
+    // return rooms;
+    return [];
   }
 }
 

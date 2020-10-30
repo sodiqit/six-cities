@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import 'regenerator-runtime';
 import './scss/index.scss';
 import './img/logo.svg';
 import './img/pin.svg';
