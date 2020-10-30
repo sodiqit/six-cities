@@ -47,6 +47,13 @@ module.exports = {
       'react/prop-types': 0,
       'react/require-default-props': 0,
       'jsx-a11y/anchor-is-valid': 0,
+      'sonarjs/prefer-immediate-return': 0,
+      'jsx-a11y/label-has-associated-control': [
+        2,
+        {
+          'labelComponents': [],
+        }
+      ],
       // unicorn
       'unicorn/filename-case': 0,
       'unicorn/no-null': 0,

@@ -42,7 +42,8 @@
     "utils/*": ["./utils/*"],
     "mocks/*": ["./mocks/*"],
     "store/*": ["./store/*"],
-    "services/*": ["./services/*"]
+    "services/*": ["./services/*"],
+    "pages/*": ["./pages/*"]
   },
   "exclude": ["node_modules"]
 }

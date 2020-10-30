@@ -43,6 +43,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-leaflet": "^2.5.2",
     "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.6",
     "@types/react-test-renderer": "16.9.3",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
@@ -90,12 +91,14 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "bind-decorator": "^1.0.11",
     "leaflet": "^1.7.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0",
     "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3"

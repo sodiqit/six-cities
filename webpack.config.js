@@ -21,6 +21,7 @@ const devServer = () => {
     host: 'localhost',
     port: 8084,
     compress: false,
+    historyApiFallback: true,
     overlay: {
       // warnings: true,
       // errors: true
@@ -97,6 +98,7 @@ module.exports = {
       'mocks': path.join(__dirname, './src/mocks/'),
       'store': path.join(__dirname, './src/store/'),
       'services': path.join(__dirname, './src/services/'),
+      'pages': path.join(__dirname, './src/pages/'),
     }
   },
   module: {

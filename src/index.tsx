@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './scss/index.scss';
 import './img/logo.svg';
 import './img/pin.svg';
@@ -10,11 +11,17 @@ import './img/room.jpg';
 import './img/apartment-02.jpg';
 import './img/apartment-03.jpg';
 import { store } from 'store/index';
-import { App } from './components/App/App';
+import Main from 'pages/Main';
+import Login from 'pages/Login';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Main} />
+        <Route path="/login" exact component={Login} />
+      </Switch>
+    </Router>
   </Provider>,
   document.querySelector('#root'),
 );
