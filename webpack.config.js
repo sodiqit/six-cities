@@ -1,11 +1,11 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
 const fileName = ext => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
 
@@ -63,6 +63,13 @@ const plugins = () => {
 
   const pluginConf = [
     new CleanWebpackPlugin(),
+
+    new CopyPlugin({
+      patterns: [
+        { from: `${PATHS.src}/img`, to: `${PATHS.dist}/img` },
+        { from: `${PATHS.src}/_redirects`, to: `${PATHS.dist}/` },
+      ],
+    }),
 
     new MiniCssExtractPlugin({
       filename: `css/${fileName("css")}`,
