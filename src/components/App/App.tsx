@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import RoomCardList from 'components/RoomCardList/RoomCardList';
 import Map from 'components/Map/Map';
 import Menu from 'components/Menu/Menu';
+import Sort from 'components/Sort/Sort';
 import { RootState } from 'store';
 import { loadRooms } from 'store/room/actions';
 import { sortRooms } from 'utils/sort-rooms';
@@ -90,42 +91,7 @@ export const App: FC = React.memo(() => {
               <b className="places__found">
                 {filteredRooms.length} places to stay in {city}
               </b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use href="#icon-arrow-select" />
-                  </svg>
-                </span>
-                <ul
-                  role="menu"
-                  className="places__options places__options--custom places__options--opened"
-                >
-                  <li
-                    role="menuitem"
-                    className="places__option places__option--active"
-                    tabIndex={0}
-                  >
-                    Popular
-                  </li>
-                  <li role="menuitem" className="places__option" tabIndex={0}>
-                    Price: low to high
-                  </li>
-                  <li role="menuitem" className="places__option" tabIndex={0}>
-                    Price: high to low
-                  </li>
-                  <li role="menuitem" className="places__option" tabIndex={0}>
-                    Top rated first
-                  </li>
-                </ul>
-                {/**  <select className="places__sorting-type" id="places-sorting">
-                <option className="places__option" value="popular" selected="">Popular</option>
-                <option className="places__option" value="to-high">Price: low to high</option>
-                <option className="places__option" value="to-low">Price: high to low</option>
-                <option className="places__option" value="top-rated">Top rated first</option>
-                </select> * */}
-              </form>
+              <Sort />
               {isLoading ? (
                 <div>Loading rooms...</div>
               ) : (

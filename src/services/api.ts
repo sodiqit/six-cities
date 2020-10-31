@@ -34,12 +34,10 @@ class Api {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   async getRooms() {
-    // const roomsDocs = await this.rooms.orderBy('price', 'asc').get();
-    // const rooms = roomsDocs.docs.map((roomDoc) => roomDoc.data());
-    // return rooms;
-    return [];
+    const roomsDocs = await this.rooms.get();
+    const rooms = roomsDocs.docs.map((roomDoc) => roomDoc.data());
+    return rooms;
   }
 
   async signIn(data: { email: string; password: string }) {
