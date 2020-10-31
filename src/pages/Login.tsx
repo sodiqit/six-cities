@@ -1,9 +1,41 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState, ChangeEvent, FormEvent } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { RootState } from 'store';
+import { userSignInAction, userCheckAction } from 'store/user/actions';
 
 const Login: FC = () => {
+  const userEmail = useSelector((state: RootState) => state.user.email);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = 'Login | 6 cities';
-  }, []);
+    dispatch(userCheckAction());
+  }, [dispatch]);
+
+  const history = useHistory();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setEmail(evt.target.value);
+  };
+
+  const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setPassword(evt.target.value);
+  };
+
+  const handleSubmit = (evt: FormEvent) => {
+    evt.preventDefault();
+    dispatch(
+      userSignInAction({
+        email,
+        password,
+      }),
+    );
+    history.push('/');
+  };
 
   return (
     <div className="page page--gray page--login">
@@ -26,7 +58,7 @@ const Login: FC = () => {
                 <li className="header__nav-item user">
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper" />
-                    <span className="header__login">Sign in</span>
+                    <span className="header__login">{userEmail || 'Sign in'}</span>
                   </a>
                 </li>
               </ul>
@@ -39,7 +71,12 @@ const Login: FC = () => {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              className="login__form form"
+              action="#"
+              method="post"
+              onSubmit={handleSubmit}
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label htmlFor="email" className="visually-hidden">
                   E-mail
@@ -50,6 +87,8 @@ const Login: FC = () => {
                   type="email"
                   name="email"
                   placeholder="Email"
+                  onChange={handleEmailChange}
+                  value={email}
                   required
                 />
               </div>
@@ -63,6 +102,8 @@ const Login: FC = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  value={password}
+                  onChange={handlePasswordChange}
                   required
                 />
               </div>

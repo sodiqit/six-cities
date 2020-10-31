@@ -23,6 +23,7 @@ class Api {
     this.analytics = firebase.analytics();
 
     this.rooms = this.firestore.collection('rooms');
+    this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -31,6 +32,27 @@ class Api {
     // const rooms = roomsDocs.docs.map((roomDoc) => roomDoc.data());
     // return rooms;
     return [];
+  }
+
+  async signIn(data: { email: string; password: string }) {
+    const { email, password } = data;
+
+    const result = await this.auth.signInWithEmailAndPassword(email, password);
+
+    return result.user?.email;
+  }
+
+  async isAuth() {
+    const { currentUser } = this.auth;
+
+    if (currentUser) return currentUser.email;
+    return null;
+  }
+
+  async createUser(data: { email: string; password: string }) {
+    const { email, password } = data;
+    const result = await this.auth.createUserWithEmailAndPassword(email, password);
+    return result;
   }
 }
 
