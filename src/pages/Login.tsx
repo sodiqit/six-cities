@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { RootState } from 'store';
-import { userSignInAction, userCheckAction } from 'store/user/actions';
+import { userSignInAction } from 'store/user/actions';
 
 const Login: FC = () => {
   const userEmail = useSelector((state: RootState) => state.user.email);
+  const isAuth = useSelector((state: RootState) => state.user.isAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = 'Login | 6 cities';
-    dispatch(userCheckAction());
-  }, [dispatch]);
-
-  const history = useHistory();
+  }, []);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,11 +32,11 @@ const Login: FC = () => {
         password,
       }),
     );
-    history.push('/');
   };
 
   return (
     <div className="page page--gray page--login">
+      {isAuth ? <Redirect to="/" /> : null}
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

@@ -13,18 +13,8 @@ function* signInUser(action: UserSignInAction): SagaIterator | null {
   }
 }
 
-function* checkUser(): SagaIterator | null {
-  try {
-    const email = yield Api.isAuth();
-    yield put(userSignInSuccessAction(email));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 function* userSaga(): SagaIterator {
   yield takeLatest(UserActionTypes.LOGIN_USER, signInUser);
-  yield takeLatest(UserActionTypes.CHECK_USER, checkUser);
 }
 
 export default userSaga;

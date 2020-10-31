@@ -2,6 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/analytics';
+import { store } from 'store';
+import { userSignInSuccessAction } from 'store/user/actions';
 import firebaseConfig from './config.json';
 
 class Api {
@@ -24,6 +26,12 @@ class Api {
 
     this.rooms = this.firestore.collection('rooms');
     this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+    this.auth.onAuthStateChanged((user) => {
+      if (user && user.email) {
+        store.dispatch(userSignInSuccessAction(user.email));
+      }
+      return null;
+    });
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -40,13 +48,6 @@ class Api {
     const result = await this.auth.signInWithEmailAndPassword(email, password);
 
     return result.user?.email;
-  }
-
-  async isAuth() {
-    const { currentUser } = this.auth;
-
-    if (currentUser) return currentUser.email;
-    return null;
   }
 
   async createUser(data: { email: string; password: string }) {
