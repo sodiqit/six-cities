@@ -1,11 +1,13 @@
-import React, { FC, useEffect } from 'react';
-import { App } from 'components/App/App';
+import React, { FC } from 'react';
+import Main from 'components/Main/Main';
+import MainLayout from '../layouts/MainLayout';
 
-const Main: FC = () => {
-  useEffect(() => {
-    document.title = 'Main | 6 cities';
-  }, []);
-  return <App />;
+const MainPage: FC = () => {
+  return (
+    <MainLayout title="Main">
+      <Main />
+    </MainLayout>
+  );
 };
 
-export default React.memo(Main);
+export default MainPage;

@@ -1,4 +1,4 @@
-import React, { FC, useState, MouseEvent, KeyboardEvent } from 'react';
+import React, { FC, useState, useEffect, MouseEvent, KeyboardEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { changeSortType } from 'store/room/actions';
@@ -13,6 +13,24 @@ const Sort: FC = () => {
   const handleEvent = () => {
     setOpened(!isOpened);
   };
+
+  useEffect(() => {
+    const closeSortMenu = (evt: Event) => {
+      const target = evt.target as HTMLElement;
+      if (
+        target.classList.contains('places__sorting-type') ||
+        target.classList.contains('places__option')
+      ) {
+        return;
+      }
+      setOpened(false);
+    };
+    document.addEventListener('click', closeSortMenu);
+
+    return () => {
+      document.removeEventListener('click', closeSortMenu);
+    };
+  }, []);
 
   const handleMenuEvent = (evt: MouseEvent | KeyboardEvent) => {
     const target = evt.target as HTMLElement;
