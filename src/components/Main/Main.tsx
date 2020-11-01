@@ -16,7 +16,7 @@ import { sortRooms } from 'utils/sort-rooms';
 import { convertStringToFilters, sortsMap } from 'utils/convert-filters';
 
 const Main: FC = React.memo(() => {
-  const { rooms, city, sortType, isLoading, cities } = useSelector(
+  const { rooms, city, sortType, isLoading, cities, error } = useSelector(
     (state: RootState) => state.rooms,
     shallowEqual,
   );
@@ -62,6 +62,26 @@ const Main: FC = React.memo(() => {
     dispatch(loadRooms());
   }, [dispatch]);
 
+  const isEmpty = rooms.length === 0;
+
+  const getScreen = () => {
+    if (isLoading) {
+      return <div>Loading rooms...</div>;
+    }
+
+    if (isEmpty && !isLoading && !error) {
+      return <div>No places to stay available</div>;
+    }
+
+    if (!isLoading && error) {
+      return <div>{error}</div>;
+    }
+
+    return (
+      <RoomCardList onChangeActiveRoom={handleChangeActiveRoom} rooms={filteredRooms} />
+    );
+  };
+
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">
@@ -79,14 +99,7 @@ const Main: FC = React.memo(() => {
                 {filteredRooms.length} places to stay in {city}
               </b>
               <Sort />
-              {isLoading ? (
-                <div>Loading rooms...</div>
-              ) : (
-                <RoomCardList
-                  onChangeActiveRoom={handleChangeActiveRoom}
-                  rooms={filteredRooms}
-                />
-              )}
+              {getScreen()}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

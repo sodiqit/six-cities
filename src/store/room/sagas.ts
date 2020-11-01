@@ -7,9 +7,13 @@ import { ActionsType } from './types';
 function* fetchRooms(): SagaIterator | null {
   try {
     const rooms = yield Api.getRooms();
-    yield put(loadRoomsSuccess(rooms));
+    if (rooms) {
+      yield put(loadRoomsSuccess(rooms));
+    } else {
+      yield put(loadRoomsFail('Something was wrong'));
+    }
   } catch (error) {
-    yield put(loadRoomsFail(error));
+    yield put(loadRoomsFail(error.message));
   }
 }
 
