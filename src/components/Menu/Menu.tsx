@@ -1,13 +1,18 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { changeCity } from 'store/room/actions';
 import { RootState } from 'store';
+import { convertFiltersToString, getKeyByValue } from 'utils/convert-filters';
 import Location from 'components/Location/Location';
 
 const Menu = () => {
-  const activeCity = useSelector((state: RootState) => state.rooms.city);
-  const cities = useSelector((state: RootState) => state.rooms.cities);
+  const { city: activeCity, sortType, cities } = useSelector(
+    (state: RootState) => state.rooms,
+    shallowEqual,
+  );
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <ul className="locations__list tabs__list">
@@ -18,7 +23,15 @@ const Menu = () => {
               city={city}
               isActive={city === activeCity}
               href="#"
-              onClick={() => dispatch(changeCity(city))}
+              onClick={() => {
+                const key = getKeyByValue(sortType);
+                const string = convertFiltersToString({
+                  cityName: city,
+                  searchType: key,
+                });
+                dispatch(changeCity(city));
+                history.push(`/${string}`);
+              }}
             />
           </li>
         );

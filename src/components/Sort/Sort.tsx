@@ -1,12 +1,16 @@
 import React, { FC, useState, useEffect, MouseEvent, KeyboardEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { RootState } from 'store';
 import { changeSortType } from 'store/room/actions';
 import { SortTypes } from 'store/room/types';
+import { convertFiltersToString, getKeyByValue } from 'utils/convert-filters';
 
 const Sort: FC = () => {
   const sortType = useSelector((state: RootState) => state.rooms.sortType);
+  const city = useSelector((state: RootState) => state.rooms.city);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [isOpened, setOpened] = useState(false);
 
@@ -37,7 +41,13 @@ const Sort: FC = () => {
     const value = target.textContent as SortTypes | null;
 
     if (value) {
+      const key = getKeyByValue(value);
+      const urlString = convertFiltersToString({
+        cityName: city,
+        searchType: key,
+      });
       dispatch(changeSortType(value));
+      history.push(`/${urlString}`);
     }
   };
 

@@ -1,22 +1,37 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import type { FC } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import RoomCardList from 'components/RoomCardList/RoomCardList';
 import Map from 'components/Map/Map';
 import Menu from 'components/Menu/Menu';
 import Sort from 'components/Sort/Sort';
 
+import { CityName } from 'services/types';
 import { RootState } from 'store';
-import { loadRooms } from 'store/room/actions';
+import { loadRooms, changeCity, changeSortType } from 'store/room/actions';
+import { SortTypes } from 'store/room/types';
 import { sortRooms } from 'utils/sort-rooms';
+import { convertStringToFilters, sortsMap } from 'utils/convert-filters';
 
 const Main: FC = React.memo(() => {
-  const { rooms, city, sortType, isLoading } = useSelector(
+  const { rooms, city, sortType, isLoading, cities } = useSelector(
     (state: RootState) => state.rooms,
     shallowEqual,
   );
   const dispatch = useDispatch();
+
+  const { search } = useLocation();
+  const { cityName, searchType } = convertStringToFilters(search);
+  if (city !== cityName && cityName && cities.includes(cityName as CityName)) {
+    dispatch(changeCity(cityName as CityName));
+  }
+
+  if (searchType !== sortType && searchType && sortsMap[searchType]) {
+    const correctSearchType = sortsMap[searchType] as SortTypes;
+    dispatch(changeSortType(correctSearchType));
+  }
 
   const [activeRoomId, setActiveRoomId] = useState(-1);
 

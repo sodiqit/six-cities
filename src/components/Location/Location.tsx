@@ -12,15 +12,15 @@ const Location: FC<LocationProps> = (props) => {
   const { city, isActive, onClick } = props;
 
   return (
-    <a
+    <button
       className={`locations__item-link tabs__item ${
         isActive ? 'tabs__item--active' : ''
       }`}
-      href="#"
       onClick={onClick}
+      type="button"
     >
       <span>{city}</span>
-    </a>
+    </button>
   );
 };
 
