@@ -13,10 +13,10 @@ const MainLayout: FC<MainLayoutProps> = (props) => {
   }, [title]);
 
   return (
-    <>
+    <div className="page page--gray page--main">
       <Header />
       {children}
-    </>
+    </div>
   );
 };
 
