@@ -2,9 +2,9 @@ import {
   UserActionTypes,
   UserSignInAction,
   UserSignInSuccessAction,
+  UserSignInFailAction,
   UserCreateAction,
   UserData,
-  UserCheckAction,
 } from './types';
 
 const userCreateAction = (userData: UserData): UserCreateAction => ({
@@ -22,8 +22,13 @@ const userSignInSuccessAction = (userEmail: string): UserSignInSuccessAction => 
   payload: userEmail,
 });
 
-const userCheckAction = (): UserCheckAction => ({
-  type: UserActionTypes.CHECK_USER,
+const userSignInFailAction = (): UserSignInFailAction => ({
+  type: UserActionTypes.LOGIN_USER_FAIL,
 });
 
-export { userCreateAction, userSignInAction, userSignInSuccessAction, userCheckAction };
+export {
+  userCreateAction,
+  userSignInAction,
+  userSignInSuccessAction,
+  userSignInFailAction,
+};

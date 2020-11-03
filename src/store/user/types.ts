@@ -2,12 +2,14 @@ enum UserActionTypes {
   CREATE_USER = 'user/CREATE_USER',
   LOGIN_USER = 'user/LOGIN_USER',
   LOGIN_USER_SUCCESS = 'user/LOGIN_USER_SUCCESS',
+  LOGIN_USER_FAIL = 'user/LOGIN_USER_FAIL',
   CHECK_USER = 'user/CHECK_USER',
 }
 
 type UserState = {
   isAuth: boolean;
   email: string | null;
+  isChecking: boolean;
 };
 
 type UserData = {
@@ -20,10 +22,6 @@ type UserCreateAction = {
   payload: UserData;
 };
 
-type UserCheckAction = {
-  type: UserActionTypes.CHECK_USER;
-};
-
 type UserSignInAction = {
   type: UserActionTypes.LOGIN_USER;
   payload: UserData;
@@ -34,14 +32,22 @@ type UserSignInSuccessAction = {
   payload: string;
 };
 
-type UserActions = UserCreateAction | UserSignInAction | UserSignInSuccessAction;
+type UserSignInFailAction = {
+  type: UserActionTypes.LOGIN_USER_FAIL;
+};
+
+type UserActions =
+  | UserCreateAction
+  | UserSignInAction
+  | UserSignInSuccessAction
+  | UserSignInFailAction;
 
 export { UserActionTypes };
 export type {
   UserCreateAction,
   UserSignInAction,
   UserSignInSuccessAction,
-  UserCheckAction,
+  UserSignInFailAction,
   UserData,
   UserState,
   UserActions,

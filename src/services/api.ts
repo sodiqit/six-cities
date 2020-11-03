@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/analytics';
 import { store } from 'store';
-import { userSignInSuccessAction } from 'store/user/actions';
+import { userSignInSuccessAction, userSignInFailAction } from 'store/user/actions';
 import firebaseConfig from './config.json';
 
 class Api {
@@ -29,6 +29,8 @@ class Api {
     this.auth.onAuthStateChanged((user) => {
       if (user && user.email) {
         store.dispatch(userSignInSuccessAction(user.email));
+      } else {
+        store.dispatch(userSignInFailAction());
       }
       return null;
     });
