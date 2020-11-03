@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { RootState } from 'store';
 import Loader from 'components/Loader/Loader';
 import MainLayout from '../layouts/MainLayout';
 
-const Favorites = () => {
+const Favorites: FC = () => {
   const { email, isAuth, isChecking } = useSelector(
     (state: RootState) => state.user,
     shallowEqual,

@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 import Menu from 'components/Menu/Menu';
 
 const MainEmpty: FC = () => {
+  const city = useSelector((state: RootState) => state.rooms.city);
+
   return (
     <main className="page__main page__main--index page__main--index-empty">
       <h1 className="visually-hidden">Cities</h1>
@@ -16,7 +20,7 @@ const MainEmpty: FC = () => {
             <div className="cities__status-wrapper tabs__content">
               <b className="cities__status">No places to stay available</b>
               <p className="cities__status-description">
-                We could not find any property available at the moment in Dusseldorf
+                We could not find any property available at the moment in {city}
               </p>
             </div>
           </section>
