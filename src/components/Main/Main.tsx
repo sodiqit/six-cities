@@ -15,7 +15,7 @@ import { SortTypes } from 'store/room/types';
 import { sortRooms } from 'utils/sort-rooms';
 import { convertStringToFilters, sortsMap } from 'utils/convert-filters';
 
-const Main: FC = React.memo(() => {
+const Main: FC = () => {
   const { rooms, city, sortType, isLoading, cities } = useSelector(
     (state: RootState) => state.rooms,
     shallowEqual,
@@ -24,11 +24,18 @@ const Main: FC = React.memo(() => {
 
   const { search } = useLocation();
   const { cityName, searchType } = convertStringToFilters(search);
-  if (city !== cityName && cityName && cities.includes(cityName as CityName)) {
+
+  const isCorrectCityName =
+    city !== cityName && cityName && cities.includes(cityName as CityName);
+
+  const isCorrectSearchType =
+    searchType !== sortType && searchType && sortsMap[searchType];
+
+  if (isCorrectCityName) {
     dispatch(changeCity(cityName as CityName));
   }
 
-  if (searchType !== sortType && searchType && sortsMap[searchType]) {
+  if (isCorrectSearchType) {
     const correctSearchType = sortsMap[searchType] as SortTypes;
     dispatch(changeSortType(correctSearchType));
   }
@@ -94,6 +101,6 @@ const Main: FC = React.memo(() => {
       </div>
     </main>
   );
-});
+};
 
-export default Main;
+export default React.memo(Main);
