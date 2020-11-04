@@ -6,6 +6,7 @@ import {
   LoadAction,
   LoadFailAction,
   LoadSuccessAction,
+  UpdateRoomAction,
   SortTypes,
 } from './types';
 
@@ -33,4 +34,16 @@ const loadRoomsFail = (error: string): LoadFailAction => ({
   payload: error,
 });
 
-export { changeCity, changeSortType, loadRoomsSuccess, loadRoomsFail, loadRooms };
+const updateRoom = (data: { id: number; isFavorite: boolean }): UpdateRoomAction => ({
+  type: ActionsType.UPDATE_ROOM,
+  payload: data,
+});
+
+export {
+  changeCity,
+  changeSortType,
+  loadRoomsSuccess,
+  loadRoomsFail,
+  loadRooms,
+  updateRoom,
+};

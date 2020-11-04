@@ -4,6 +4,7 @@ enum UserActionTypes {
   LOGIN_USER_SUCCESS = 'user/LOGIN_USER_SUCCESS',
   LOGIN_USER_FAIL = 'user/LOGIN_USER_FAIL',
   CHECK_USER = 'user/CHECK_USER',
+  CLICK_FAVORITE = 'user/CLICK_FAVORITE',
 }
 
 type UserState = {
@@ -36,6 +37,11 @@ type UserSignInFailAction = {
   type: UserActionTypes.LOGIN_USER_FAIL;
 };
 
+type UserFavoriteAction = {
+  type: UserActionTypes.CLICK_FAVORITE;
+  payload: { id: number; isFavorite: boolean };
+};
+
 type UserActions =
   | UserCreateAction
   | UserSignInAction
@@ -48,6 +54,7 @@ export type {
   UserSignInAction,
   UserSignInSuccessAction,
   UserSignInFailAction,
+  UserFavoriteAction,
   UserData,
   UserState,
   UserActions,

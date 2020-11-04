@@ -3,6 +3,7 @@ import {
   UserSignInAction,
   UserSignInSuccessAction,
   UserSignInFailAction,
+  UserFavoriteAction,
   UserCreateAction,
   UserData,
 } from './types';
@@ -26,9 +27,18 @@ const userSignInFailAction = (): UserSignInFailAction => ({
   type: UserActionTypes.LOGIN_USER_FAIL,
 });
 
+const userFavoriteAction = (data: {
+  id: number;
+  isFavorite: boolean;
+}): UserFavoriteAction => ({
+  type: UserActionTypes.CLICK_FAVORITE,
+  payload: data,
+});
+
 export {
   userCreateAction,
   userSignInAction,
   userSignInSuccessAction,
   userSignInFailAction,
+  userFavoriteAction,
 };

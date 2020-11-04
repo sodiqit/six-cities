@@ -6,6 +6,7 @@ enum ActionsType {
   LOAD_ROOMS_SUCCESS = 'rooms/LOAD_ROOMS_SUCCESS',
   LOAD_ROOMS_FAIL = 'rooms/LOAD_ROOMS_FAIL',
   LOAD_ROOMS = 'rooms/LOAD_ROOMS',
+  UPDATE_ROOM = 'rooms/UPDATE_ROOM',
 }
 
 enum SortTypes {
@@ -48,12 +49,18 @@ type LoadFailAction = {
   payload: string;
 };
 
+type UpdateRoomAction = {
+  type: ActionsType.UPDATE_ROOM;
+  payload: { id: number; isFavorite: boolean };
+};
+
 type RoomsActions =
   | ChangeCityAction
   | LoadSuccessAction
   | LoadFailAction
   | LoadAction
-  | ChangeSortTypeAction;
+  | ChangeSortTypeAction
+  | UpdateRoomAction;
 
 export { ActionsType, SortTypes };
 export type {
@@ -63,5 +70,6 @@ export type {
   LoadAction,
   LoadSuccessAction,
   LoadFailAction,
+  UpdateRoomAction,
   RoomsActions,
 };

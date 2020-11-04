@@ -1,4 +1,21 @@
+import { Room } from 'services/types';
 import { RoomsState, ActionsType, SortTypes, RoomsActions } from './types';
+
+const updateRooms = (
+  data: { id: number; isFavorite: boolean },
+  rooms: Room[],
+): Room[] => {
+  const { id, isFavorite } = data;
+
+  const updatedRooms = rooms.map((room) => {
+    if (id === room.id) {
+      return { ...room, is_favorite: isFavorite };
+    }
+    return room;
+  });
+
+  return updatedRooms;
+};
 
 const initialState: RoomsState = {
   error: null,
@@ -32,6 +49,11 @@ const reducer = (state = initialState, action: RoomsActions): RoomsState => {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    case ActionsType.UPDATE_ROOM:
+      return {
+        ...state,
+        rooms: updateRooms(action.payload, state.rooms),
       };
     default:
       return state;
