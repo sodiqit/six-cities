@@ -28,8 +28,7 @@ const Main: FC = () => {
   const isCorrectCityName =
     city !== cityName && cityName && cities.includes(cityName as CityName);
 
-  const isCorrectSearchType =
-    searchType !== sortType && searchType && sortsMap[searchType];
+  const isCorrectSearchType = sortsMap[searchType] !== sortType && searchType;
 
   if (isCorrectCityName) {
     dispatch(changeCity(cityName as CityName));
