@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 
-const Header: FC = () => {
+interface HeaderProps {
+  path?: string;
+}
+
+const Header: FC<HeaderProps> = (props) => {
   const { isAuth, email } = useSelector((state: RootState) => state.user);
+
+  const { path = './' } = props;
 
   return (
     <header className="header">
@@ -14,7 +20,7 @@ const Header: FC = () => {
             <Link to="/" className="header__logo-link">
               <img
                 className="header__logo"
-                src="img/logo.svg"
+                src={`${path}img/logo.svg`}
                 alt="6 cities logo"
                 width="81"
                 height="41"
