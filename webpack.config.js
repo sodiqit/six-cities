@@ -93,6 +93,7 @@ module.exports = {
   },
   output: {
     filename: `js/${fileName("js")}`,
+    publicPath: '/',
     path: PATHS.dist
   },
   devtool: isDev ? "source-map" : false, //"cheap-module-eval-source-map" - not working
