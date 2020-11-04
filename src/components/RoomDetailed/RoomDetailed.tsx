@@ -10,7 +10,7 @@ interface RoomDetailedProps {
 }
 
 const RoomDetailed: FC<RoomDetailedProps> = ({ id }) => {
-  const { isLoading, rooms } = useSelector((state: RootState) => state.rooms);
+  const { rooms } = useSelector((state: RootState) => state.rooms);
   const currentRoom = rooms.find((room) => room.id.toString() === id);
   console.log(currentRoom);
 
