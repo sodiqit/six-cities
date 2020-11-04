@@ -13,8 +13,10 @@ const MainPage: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadRooms());
-  }, [dispatch]);
+    if (rooms.length === 0) {
+      dispatch(loadRooms());
+    }
+  }, [dispatch, rooms]);
 
   const isEmpty = rooms && rooms.length === 0;
 
