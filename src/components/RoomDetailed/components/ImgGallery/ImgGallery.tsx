@@ -1,12 +1,7 @@
 import React, { FC } from 'react';
 
-type Image = {
-  src: string;
-  alt: '';
-};
-
 interface ImgGalleryProps {
-  images: Image[];
+  images: string[];
 }
 
 const ImgGallery: FC<ImgGalleryProps> = (props) => {
@@ -14,12 +9,15 @@ const ImgGallery: FC<ImgGalleryProps> = (props) => {
 
   return (
     <div className="property__gallery">
-      {images.map(({ src, alt }) => {
-        return (
-          <div className="property__image-wrapper" key={`${src}_${alt}`}>
-            <img className="property__image" src={src} alt={alt} />
-          </div>
-        );
+      {images.map((src, i) => {
+        if (i < 9) {
+          return (
+            <div className="property__image-wrapper" key={`${src}`}>
+              <img className="property__image" src={src} alt="" />
+            </div>
+          );
+        }
+        return null;
       })}
     </div>
   );

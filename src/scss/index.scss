@@ -1055,7 +1055,7 @@ img {
 .property__gallery::before {
   content: "";
   position: absolute;
-  top: -1px;
+  top: 0;
   left: 0;
   width: 34px;
   height: 100%;
@@ -1069,7 +1069,7 @@ img {
 .property__gallery::after {
   content: "";
   position: absolute;
-  top: -1px;
+  top: 0;
   right: 0;
   width: 34px;
   height: 100%;
@@ -1234,7 +1234,7 @@ img {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 38px;
-  margin-left: -64px
+  margin-left: -15px;
 }
 
 .property__feature {
