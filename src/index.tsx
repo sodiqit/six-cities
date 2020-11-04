@@ -9,6 +9,7 @@ import { store } from 'store/index';
 import Main from 'pages/Main';
 import Login from 'pages/Login';
 import Favorites from 'pages/Favorites';
+import Offer from 'pages/Offer';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,6 +18,7 @@ ReactDOM.render(
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
         <Route path="/favorites" exact component={Favorites} />
+        <Route path="/offer/:id" exact component={Offer} />
       </Switch>
     </Router>
   </Provider>,
