@@ -1,10 +1,13 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { CityName } from 'services/types';
-import RoomCard from './RoomСard';
+import RoomCard from './RoomCard';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('Room card', () => {
-  it('correctly render', () => {
+  it('correctly hover', () => {
     const fn = jest.fn();
     const fn1 = jest.fn();
     const mockRoom = {
@@ -41,18 +44,22 @@ describe('Room card', () => {
       title: 'room',
       type: 'mock room',
     };
-    const tree = renderer
-      .create(
-        <RoomCard
-          href=""
-          room={mockRoom}
-          onMouseEnter={fn}
-          onMouseLeave={fn1}
-          onFavoriteClick={fn1}
-        />,
-      )
-      .toJSON();
+    const roomCard = shallow(
+      <RoomCard
+        href=""
+        room={mockRoom}
+        onMouseEnter={fn}
+        onMouseLeave={fn1}
+        onFavoriteClick={fn1}
+      />,
+    );
 
-    expect(tree).toMatchSnapshot();
+    roomCard.simulate('mouseenter');
+    roomCard.simulate('mouseleave');
+
+    expect(fn).toHaveBeenCalled();
+    expect(fn).toHaveBeenCalledTimes(1);
+    expect(fn1).toHaveBeenCalled();
+    expect(fn1).toHaveBeenCalledTimes(1);
   });
 });

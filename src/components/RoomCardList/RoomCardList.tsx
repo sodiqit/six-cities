@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { userFavoriteAction } from 'store/user/actions';
 
-import RoomCard from 'components/RoomСard/RoomСard';
+import RoomCard from 'components/RoomCard/RoomCard';
 import { Room } from 'services/types';
 
 interface RoomCardListProps {
