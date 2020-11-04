@@ -23,7 +23,9 @@ const MainPage: FC = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <MainLayout title="Main">{isEmpty ? <MainEmpty /> : <Main />}</MainLayout>
+        <MainLayout theme="main" title="Main">
+          {isEmpty ? <MainEmpty /> : <Main />}
+        </MainLayout>
       )}
     </>
   );
