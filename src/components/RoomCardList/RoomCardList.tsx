@@ -1,4 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { userFavoriteAction } from 'store/user/actions';
+
 import RoomCard from 'components/RoomСard/RoomСard';
 import { Room } from 'services/types';
 
@@ -10,12 +14,18 @@ interface RoomCardListProps {
 const RoomCardList = (props: RoomCardListProps) => {
   const { onChangeActiveRoom, rooms } = props;
 
+  const dispatch = useDispatch();
+
   const handleMouseEnter = (id: number) => {
     onChangeActiveRoom(id);
   };
 
   const handleMouseLeave = () => {
     onChangeActiveRoom(-1);
+  };
+
+  const handleFavoriteClick = (id: number, isFavorite: boolean) => {
+    dispatch(userFavoriteAction({ id, isFavorite }));
   };
 
   return (
@@ -27,6 +37,8 @@ const RoomCardList = (props: RoomCardListProps) => {
             room={room}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onFavoriteClick={handleFavoriteClick}
+            href={`/offer/${room.id}`}
           />
         );
       })}
