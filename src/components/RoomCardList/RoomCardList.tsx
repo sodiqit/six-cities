@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { userFavoriteAction } from 'store/user/actions';
+import { changeFavorite } from 'store/user/actions';
 
 import RoomCard from 'components/RoomCard/RoomCard';
 import { Room } from 'services/types';
@@ -25,7 +25,7 @@ const RoomCardList = (props: RoomCardListProps) => {
   };
 
   const handleFavoriteClick = (id: number, isFavorite: boolean) => {
-    dispatch(userFavoriteAction({ id, isFavorite }));
+    dispatch(changeFavorite({ id, isFavorite }));
   };
 
   return (

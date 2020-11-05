@@ -2,13 +2,13 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import Api from 'services/api';
 import { updateRoom } from 'store/room/actions';
-import { userSignInSuccessAction } from './actions';
+import { signInSuccess } from './actions';
 import { UserActionTypes, UserSignInAction, UserFavoriteAction } from './types';
 
 function* signInUser(action: UserSignInAction): SagaIterator | null {
   try {
     const email = yield Api.signIn(action.payload);
-    yield put(userSignInSuccessAction(email));
+    yield put(signInSuccess(email));
   } catch (error) {
     console.log(error);
   }

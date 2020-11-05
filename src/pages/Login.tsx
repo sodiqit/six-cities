@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { RootState } from 'store';
-import { userSignInAction } from 'store/user/actions';
+import { signIn } from 'store/user/actions';
 
 const Login: FC = () => {
   const userEmail = useSelector((state: RootState) => state.user.email);
@@ -27,7 +27,7 @@ const Login: FC = () => {
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     dispatch(
-      userSignInAction({
+      signIn({
         email,
         password,
       }),
