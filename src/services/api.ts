@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/analytics';
 import { store } from 'store';
-import { userSignInSuccessAction, userSignInFailAction } from 'store/user/actions';
+import { signInSuccess, signInFail } from 'store/user/actions';
 import { loadRoomsSuccess } from 'store/room/actions';
 import { Room } from './types';
 import firebaseConfig from './config.json';
@@ -16,6 +16,8 @@ class Api {
   rooms: firebase.firestore.CollectionReference;
 
   users: firebase.firestore.CollectionReference;
+
+  roomsComments: firebase.firestore.CollectionReference;
 
   analytics: firebase.analytics.Analytics;
 
@@ -30,10 +32,12 @@ class Api {
 
     this.rooms = this.firestore.collection('rooms');
     this.users = this.firestore.collection('users');
+    this.roomsComments = this.firestore.collection('comments');
+
     this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
     this.auth.onAuthStateChanged(async (user) => {
       if (user && user.email) {
-        store.dispatch(userSignInSuccessAction(user.email));
+        store.dispatch(signInSuccess(user.email));
         const isExist = (await this.users.doc(user.uid).get()).exists;
         if (!isExist) {
           await this.users.doc(user.uid).set({ favorites: {} });
@@ -41,7 +45,7 @@ class Api {
           await this.updateRoomsWithUserInfo();
         }
       } else {
-        store.dispatch(userSignInFailAction());
+        store.dispatch(signInFail());
       }
       return null;
     });
@@ -81,6 +85,18 @@ class Api {
 
       store.dispatch(loadRoomsSuccess(updatedRooms as Room[]));
     }
+  }
+
+  async getRoomComments(id: number) {
+    const commentDocs = await this.roomsComments
+      .doc(`${id}`)
+      .collection('comments')
+      .get();
+    const comments = commentDocs.docs.map((doc) => {
+      return doc.data();
+    });
+
+    return comments;
   }
 
   async getRooms() {

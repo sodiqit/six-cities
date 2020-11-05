@@ -18,6 +18,14 @@ type HostInfo = {
   avatar_url: string;
 };
 
+interface Comment {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: HostInfo;
+}
+
 interface Room {
   bedrooms: number;
   city: CityInfo;
@@ -37,4 +45,4 @@ interface Room {
   type: string;
 }
 
-export type { CityName, Room, Location };
+export type { CityName, Room, Comment, Location };
