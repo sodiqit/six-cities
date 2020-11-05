@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -10,14 +10,13 @@ const isProd = !isDev;
 const fileName = ext => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
 
 const PATHS = {
-  src: path.join(__dirname, "./src"),
-  dist: path.join(__dirname, "./public")
+  src: path.join(__dirname, './src'),
+  dist: path.join(__dirname, './public')
 };
 
 const devServer = () => {
   return {
-    progress: true,
-    contentBase: path.join(__dirname, `public`),
+    contentBase: path.join(__dirname, 'public'),
     host: 'localhost',
     port: 8084,
     compress: false,
@@ -34,9 +33,9 @@ const optimization = () => {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          name: "vendors",
+          name: 'vendors',
           test: /node_modules/,
-          chunks: "all",
+          chunks: 'all',
           enforce: true
         }
       }
@@ -72,7 +71,7 @@ const plugins = () => {
     }),
 
     new MiniCssExtractPlugin({
-      filename: `css/${fileName("css")}`,
+      filename: `css/${fileName('css')}`,
       allChunks: true
     }),
 
@@ -92,11 +91,11 @@ module.exports = {
     index: './src/index.tsx'
   },
   output: {
-    filename: `js/${fileName("js")}`,
+    filename: `js/${fileName('js')}`,
     publicPath: '/',
     path: PATHS.dist
   },
-  devtool: isDev ? "source-map" : false, //"cheap-module-eval-source-map" - not working
+  devtool: isDev ? 'source-map' : false,
   devServer: isDev ? devServer() : {},
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -114,8 +113,8 @@ module.exports = {
       {
         // JavaScript
         test: /\.ts(x)?$/,
-        use: ["babel-loader", "awesome-typescript-loader"],
-        exclude: "/node_modules/"
+        use: ['babel-loader', 'awesome-typescript-loader'],
+        exclude: '/node_modules/'
       },
       {
         // scss
@@ -129,11 +128,11 @@ module.exports = {
             }
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: { sourceMap: isDev }
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 config: './postcss.config.js'
@@ -142,7 +141,7 @@ module.exports = {
             }
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: isDev
             }
@@ -152,11 +151,11 @@ module.exports = {
       {
         // Fonts
         test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "[name].[ext]",
-          publicPath: "./../fonts",
-          outputPath: "./fonts/"
+          name: '[name].[ext]',
+          publicPath: './../fonts',
+          outputPath: './fonts/'
         }
       },
       {
@@ -166,9 +165,9 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: "[name].[ext]",
-              publicPath: "./../img",
-              outputPath: "./img"
+              name: '[name].[ext]',
+              publicPath: './../img',
+              outputPath: './img'
             }
           }
         ],
